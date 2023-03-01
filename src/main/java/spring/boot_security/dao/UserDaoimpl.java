@@ -1,5 +1,7 @@
 package spring.boot_security.dao;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import spring.boot_security.model.User;
@@ -66,10 +68,18 @@ public class UserDaoimpl implements UserDao {
 
     @Override
     public List<User> findUser(User user) {
-        TypedQuery<User> query = entityManager.createQuery("from User where name=:nm and lastName=:lnm and email=:eml", User.class);
+        TypedQuery<User> query = entityManager.createQuery("from User where username=:nm and lastName=:lnm and email=:eml", User.class);
         query.setParameter("nm", user.getUsername());
         query.setParameter("lnm", user.getLastName());
         query.setParameter("eml", user.getEmail());
         return query.getResultList();
     }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return entityManager.createQuery("from User where username=:username", User.class)
+                .setParameter("username", username).getSingleResult();
+    }
+
+
 }
