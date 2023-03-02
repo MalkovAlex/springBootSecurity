@@ -57,7 +57,7 @@
                 <form th:method="get" th:action="@{/admin/user/{i}/edit(i=${u.id})}">
                     <input type="submit" value="редактировать"/>
                 </form>
-                <form th:method="delete" th:action="@{/admin/{i}(i=${u.id})}">
+                <form th:method="delete" th:action="@{/admin/delete/{i}(i=${u.id})}">
                     <input type="submit" value="удалить"/>
                 </form>
             </td>

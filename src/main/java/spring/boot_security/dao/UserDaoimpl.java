@@ -51,12 +51,9 @@ public class UserDaoimpl implements UserDao {
 
     @Override
     public void deleteUser(Long id) {
-        entityManager.joinTransaction();
-        try {
-            entityManager.remove(getUser(id));
-        } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
-        }
+        entityManager.createQuery(
+                "DELETE User WHERE id = :id").setParameter("id", id).executeUpdate();
+
     }
 
     @Override
