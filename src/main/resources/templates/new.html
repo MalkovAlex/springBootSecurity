@@ -5,7 +5,7 @@
   <title>Новый пользователь</title>
 </head>
 <body>
-<form th:method="post" th:action="@{/admin}" th:object="${user}">
+<form th:method="post" th:action="@{/admin/new}" th:object="${user}">
   <label for="nm">Имя :</label>
   <input id="nm" type="text" th:field="*{username}">
   <br>
@@ -18,8 +18,21 @@
   <label for="pswrd">password :</label>
   <input id="pswrd" type="text" th:field="*{password}">
   <br>
+  <p>
+    <label>Roles:
+      <input type="checkbox" name="roleList"
+             th:each="role : ${roleList}"
+             th:text="${role.getTrimName()}"
+             th:value="${role.id}"
+             th:field="*{roles}"
+      />
+    </label>
+  </p>
   <input type="submit" value="Создать!">
 </form>
-<a href="/logout">Logout</a>
+<br>
+<form action="/logout">
+  <button>Logout</button>
+</form>
 </body>
 </html>

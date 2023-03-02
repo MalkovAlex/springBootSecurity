@@ -1,5 +1,6 @@
 package spring.boot_security.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,6 +18,7 @@ import java.util.List;
 public class UserServiceImp implements UserService, UserDetailsService {
     private final UserDao userDao;
 
+    @Autowired
     public UserServiceImp(UserDao userDao) {
         this.userDao = userDao;
     }

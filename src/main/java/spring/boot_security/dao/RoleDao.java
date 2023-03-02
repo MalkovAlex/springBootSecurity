@@ -5,6 +5,7 @@ import spring.boot_security.model.Role;
 import java.util.List;
 
 public interface RoleDao {
+    boolean add(Role user);
 
     List<Role> getAllRoles();
 

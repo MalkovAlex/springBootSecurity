@@ -1,31 +1,48 @@
 package spring.boot_security.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import spring.boot_security.model.Role;
 import spring.boot_security.model.User;
+import spring.boot_security.service.RoleService;
 import spring.boot_security.service.UserService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
+    private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
 
-    public AdminController(UserService userService) {
+    @Autowired
+    public AdminController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.roleService = roleService;
+        this.passwordEncoder = passwordEncoder;
     }
+
 
     // Create
 
     @GetMapping("/new")
-    public String createForm(@ModelAttribute("user") User user) {
+    public String createForm(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        List<Role> roles = roleService.getAllRoles();
+        model.addAttribute("roleList", roles);
         return "new";
     }
 
     @PostMapping("/new")
     public String createUser(@ModelAttribute("user") User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.createUser(user);
-        return "redirect:admin";
+        return "redirect:/admin";
     }
 
     // Read
@@ -47,6 +64,7 @@ public class AdminController {
     @GetMapping("user/{id}/edit")
     public String editUser(Model model, @PathVariable() long id) {
         model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("roleList", userService.getList());
         return "edit";
     }
 
@@ -58,10 +76,10 @@ public class AdminController {
 
     // Delete
 
-    @DeleteMapping("users/{id}")
+    @DeleteMapping("admin/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(id);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
 }

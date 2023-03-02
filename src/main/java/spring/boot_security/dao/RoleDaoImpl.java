@@ -1,5 +1,6 @@
 package spring.boot_security.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import spring.boot_security.model.Role;
 
@@ -9,8 +10,14 @@ import java.util.List;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
-    @PersistenceContext
+    @Autowired
     private EntityManager entityManager;
+
+    @Override
+    public boolean add(Role role) {
+        entityManager.persist(role);
+        return true;
+    }
 
     @Override
     public List<Role> getAllRoles() {

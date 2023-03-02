@@ -1,5 +1,6 @@
 package spring.boot_security.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import spring.boot_security.dao.RoleDao;
@@ -13,8 +14,15 @@ public class RoleServiceImp implements RoleService{
 
     private final RoleDao roleDao;
 
+    @Autowired
     public RoleServiceImp(RoleDao roleDao) {
         this.roleDao = roleDao;
+    }
+
+    @Override
+    public boolean add(Role role) {
+        roleDao.add(role);
+        return true;
     }
 
     @Override

@@ -17,6 +17,19 @@
   <br>
   <input type="hidden" th:field="*{id}" th:value="${user.id}">
   <input type="hidden" th:field="*{password}" th:value="${user.password}">
+  <p>
+    <label>Roles:
+
+
+      <input type="checkbox" name="roleList"
+             th:each="role : ${roleList}"
+             th:text="${role.getRoles()}"
+             th:value="${role.id}"
+             th:field="*{roles}"
+      />
+      />
+    </label>
+  </p>
   <input type="submit" value="Сохранить">
 </form>
 </body>
