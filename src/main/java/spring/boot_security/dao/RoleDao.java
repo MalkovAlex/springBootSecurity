@@ -3,6 +3,7 @@ package spring.boot_security.dao;
 import spring.boot_security.model.Role;
 
 import java.util.List;
+import java.util.Set;
 
 public interface RoleDao {
     //boolean add(Role user);

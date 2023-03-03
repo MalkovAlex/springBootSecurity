@@ -7,6 +7,7 @@ import spring.boot_security.dao.RoleDao;
 import spring.boot_security.model.Role;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional

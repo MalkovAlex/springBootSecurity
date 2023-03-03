@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import spring.boot_security.model.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserDao {
     void createUser(User user);

@@ -3,6 +3,7 @@ package spring.boot_security.service;
 import spring.boot_security.model.Role;
 
 import java.util.List;
+import java.util.Set;
 
 public interface RoleService {
 

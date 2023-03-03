@@ -7,6 +7,7 @@ import spring.boot_security.model.Role;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
