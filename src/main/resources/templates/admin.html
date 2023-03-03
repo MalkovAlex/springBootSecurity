@@ -51,7 +51,7 @@
             <th th:text="${u.lastName}"></th>
             <th th:text="${u.email}"></th>
             <<td>
-            <a th:each="role: ${u.getRoles()}" th:text="${role.getName()}" ></a>
+            <a th:each="role: ${u.getRoles()}" th:text="${role.getTrimName()}" ></a>
         </td>
             <td class="no-border">
                 <form th:method="get" th:action="@{/admin/user/{i}/edit(i=${u.id})}">

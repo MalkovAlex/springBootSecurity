@@ -13,6 +13,7 @@ public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "role")
     private String name;
     @Transient
     @ManyToMany(mappedBy = "roles")
@@ -46,7 +47,7 @@ public class Role implements GrantedAuthority {
         return name;
     }
     public String getTrimName() {
-        return name.replace("ROLE_","");
+        return name.replace("ROLE_"," ");
     }
 
 

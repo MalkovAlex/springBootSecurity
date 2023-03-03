@@ -10,24 +10,24 @@ import java.util.List;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
-    @Autowired
+    @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
-    public boolean add(Role role) {
-        entityManager.persist(role);
-        return true;
-    }
+//    @Override
+//    public boolean add(Role role) {
+//        entityManager.persist(role);
+//        return true;
+//    }
 
     @Override
     public List<Role> getAllRoles() {
-        return entityManager.createQuery("select role from Role role", Role.class).getResultList();
+        return entityManager.createQuery("select role from Role role").getResultList();
     }
 
     @Override
     public Role getRole(String userRole) {
-        return entityManager.createQuery("select role from Role role where role.name =: name", Role.class)
-                .setParameter("name", userRole).getSingleResult();
+        return entityManager.createQuery("select r from Role r where r.role =: role", Role.class)
+                .setParameter("role",userRole).getSingleResult();
     }
 
     @Override
