@@ -20,11 +20,7 @@ public class RoleServiceImp implements RoleService{
         this.roleDao = roleDao;
     }
 
-//    @Override
-//    public boolean add(Role role) {
-//        roleDao.add(role);
-//        return true;
-//    }
+
 
     @Override
     public List<Role> getAllRoles() {

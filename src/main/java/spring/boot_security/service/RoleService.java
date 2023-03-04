@@ -7,7 +7,6 @@ import java.util.Set;
 
 public interface RoleService {
 
-    //public boolean add(Role role);
     List<Role> getAllRoles();
 
     Role getRole(String userRole);

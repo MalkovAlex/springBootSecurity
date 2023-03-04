@@ -44,6 +44,12 @@ public class User implements UserDetails{
     public User() {
     }
 
+    public User(Set<Role> roles) {
+        roles.add(new Role(1L, "ROLE_ADMIN"));
+        roles.add(new Role(2L, "ROLE_USER"));
+        this.roles = roles;
+    }
+
     public User(String username, String lastName, String email, String password, Set<Role> roles) {
         this.username = username;
         this.lastName = lastName;
@@ -117,7 +123,7 @@ public class User implements UserDetails{
         this.password = password;
     }
 
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
