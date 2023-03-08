@@ -25,21 +25,25 @@ public class UserServiceImp implements UserService, UserDetailsService {
     }
 
     @Override
+    @Transactional
     public void createUser(User user) {
         userDao.createUser(user);
     }
 
     @Override
+    @Transactional
     public void deleteUser(Long id) {
         userDao.deleteUser(id);
     }
 
     @Override
+    @Transactional
     public void deleteUser(User user) {
         userDao.deleteUser(user);
     }
 
     @Override
+    @Transactional
     public void updateUser(Long id, User user) {
         userDao.updateUser(id, user);
     }
@@ -63,6 +67,8 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userDao.getUserByUsername(username);
+        User user = userDao.getUserByUsername(username);
+        user.getRoles().size();
+        return user;
     }
 }

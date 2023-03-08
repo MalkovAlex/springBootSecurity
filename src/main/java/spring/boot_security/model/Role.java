@@ -14,6 +14,7 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "role")
+
     private String name;
     @Transient
     @ManyToMany(mappedBy = "roles")
@@ -46,8 +47,9 @@ public class Role implements GrantedAuthority {
     public String getName() {
         return name;
     }
+
     public String getTrimName() {
-        return name.replace("ROLE_"," ");
+        return name.replace("ROLE_", " ");
     }
 
 
@@ -64,19 +66,37 @@ public class Role implements GrantedAuthority {
     }
 
     @Override
-    public String getAuthority() {
-        return getName();
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Role)) return false;
-        Role role = (Role) o;
-        return Objects.equals(id, role.id);
+    public String toString() {
+        return this.name;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Role other = (Role) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String getAuthority() {
+        return getName();
     }
 }

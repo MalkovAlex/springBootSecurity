@@ -23,11 +23,11 @@
 
       <input type="checkbox" name="roleList"
              th:each="role : ${roleList}"
-             th:text="${role.getRoles()}"
-             th:value="${role.getRoles()}"
+             th:text="${role.getTrimName()}"
+             th:value="${role.getName()}"
              th:field="*{roles}"
       />
-      />
+
     </label>
   </p>
   <input type="submit" value="Сохранить">

@@ -34,19 +34,19 @@ public class UserDaoimpl implements UserDao {
 
     @Override
     public List<User> getList() {
-        TypedQuery<User> query = entityManager.createQuery("from User", User.class);
-        return query.getResultList();
+        return entityManager.createQuery("from User", User.class).getResultList();
+
     }
 
     @Override
     public void updateUser(Long id, User user) {
-        entityManager.joinTransaction();
-        User u = getUser(id);
-        u.setUsername(user.getUsername());
-        u.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        u.setLastName(user.getLastName());
-        u.setEmail(user.getEmail());
-        entityManager.merge(u);
+//        entityManager.joinTransaction();
+//        User u = getUser(id);
+//        u.setUsername(user.getUsername());
+//        u.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+//        u.setLastName(user.getLastName());
+//        u.setEmail(user.getEmail());
+        entityManager.merge(user);
     }
 
     @Override

@@ -39,18 +39,18 @@ public class User implements UserDetails{
     @JoinTable(name = "users_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public User() {
     }
 
-    public User(Set<Role> roles) {
+    public User(List<Role> roles) {
         roles.add(new Role(1L, "ROLE_ADMIN"));
         roles.add(new Role(2L, "ROLE_USER"));
         this.roles = roles;
     }
 
-    public User(String username, String lastName, String email, String password, Set<Role> roles) {
+    public User(String username, String lastName, String email, String password, List<Role> roles) {
         this.username = username;
         this.lastName = lastName;
         this.email = email;
@@ -123,11 +123,11 @@ public class User implements UserDetails{
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 

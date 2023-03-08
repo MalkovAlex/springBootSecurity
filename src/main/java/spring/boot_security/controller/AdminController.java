@@ -11,7 +11,6 @@ import spring.boot_security.service.RoleService;
 import spring.boot_security.service.UserService;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,9 +34,6 @@ public class AdminController {
         User user = new User();
         model.addAttribute("user", user);
         List<Role> roles = roleService.getAllRoles();
-        roles.clear();
-        roles.add(roleService.getRoleById(1L));
-        roles.add(roleService.getRoleById(2L));
         model.addAttribute("roleList", roles);
         return "new";
     }
@@ -68,7 +64,7 @@ public class AdminController {
     @GetMapping("user/{id}/edit")
     public String editUser(Model model, @PathVariable() long id) {
         model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("roleList", userService.getList());
+        model.addAttribute("roleList",roleService.getAllRoles());
         return "edit";
     }
 
