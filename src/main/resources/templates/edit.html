@@ -24,7 +24,7 @@
       <input type="checkbox" name="roleList"
              th:each="role : ${roleList}"
              th:text="${role.getTrimName()}"
-             th:value="${role.getName()}"
+             th:value="${role.getId()}"
              th:field="*{roles}"
       />
 

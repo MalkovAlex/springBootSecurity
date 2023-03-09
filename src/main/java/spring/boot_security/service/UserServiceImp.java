@@ -16,7 +16,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class UserServiceImp implements UserService, UserDetailsService {
+public class UserServiceImp implements UserService {
     private final UserDao userDao;
 
     @Autowired
@@ -27,6 +27,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
     @Override
     @Transactional
     public void createUser(User user) {
+
         userDao.createUser(user);
     }
 
@@ -68,7 +69,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.getUserByUsername(username);
-        //user.getRoles();
         return user;
     }
 }

@@ -1,11 +1,8 @@
 package spring.boot_security.dao;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Repository;
 import spring.boot_security.model.User;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -40,12 +37,6 @@ public class UserDaoimpl implements UserDao {
 
     @Override
     public void updateUser(Long id, User user) {
-//        entityManager.joinTransaction();
-//        User u = getUser(id);
-//        u.setUsername(user.getUsername());
-//        u.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-//        u.setLastName(user.getLastName());
-//        u.setEmail(user.getEmail());
         entityManager.merge(user);
     }
 

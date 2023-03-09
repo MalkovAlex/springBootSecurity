@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -34,21 +35,17 @@ public class User implements UserDetails{
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.ALL})
     @Fetch(FetchMode.JOIN)
     @JoinTable(name = "users_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
     public User() {
     }
 
-    public User(List<Role> roles) {
-        roles.add(new Role(1L, "ROLE_ADMIN"));
-        roles.add(new Role(2L, "ROLE_USER"));
-        this.roles = roles;
-    }
+
 
     public User(String username, String lastName, String email, String password, List<Role> roles) {
         this.username = username;
@@ -131,15 +128,5 @@ public class User implements UserDetails{
         this.roles = roles;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                '}';
-    }
+
 }
