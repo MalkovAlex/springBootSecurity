@@ -11,6 +11,7 @@ import spring.boot_security.service.RoleService;
 import spring.boot_security.service.UserService;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -41,6 +42,12 @@ public class AdminController {
     @PostMapping("/new")
     public String createUser(@ModelAttribute("user") User user) { //todo
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        List<Role> list = user.getRoles();
+        for (Role role : list){
+            role.setId(Long.valueOf(role.getName()));
+            role.setName(roleService.getRoleById(role.getId()).getName());
+        }
+        user.setRoles(list);
 
         userService.createUser(user);
         return "redirect:/admin";
@@ -71,6 +78,12 @@ public class AdminController {
 
     @PatchMapping("edit/{id}")
     public String edit(@ModelAttribute("user") User user, @PathVariable("id") long id) {
+        List<Role> list = user.getRoles();
+        for (Role role : list){
+            role.setId(Long.valueOf(role.getName()));
+            role.setName(roleService.getRoleById(role.getId()).getName());
+        }
+        user.setRoles(list);
         userService.updateUser(id, user);
         return "redirect:/admin";
     }
