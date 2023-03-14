@@ -11,6 +11,7 @@ import spring.boot_security.service.UserService;
 import javax.annotation.PostConstruct;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ public class Initialisation {
             Role user = new Role("ROLE_USER");
             roleService.addRole(admin);
             roleService.addRole(user);
-            List<Role> setRole = new ArrayList<>();
+            Set<Role> setRole = new HashSet<>();
             setRole.add(admin);
             setRole.add(user);
             User firstAdmin = new User("admin", "adminlnm", "boss@mail.ru",

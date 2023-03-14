@@ -9,7 +9,7 @@ import spring.boot_security.model.User;
 
 import java.util.List;
 
-public interface UserService extends UserDetailsService{
+public interface UserService{
 
     User getUser(Long id);
 
