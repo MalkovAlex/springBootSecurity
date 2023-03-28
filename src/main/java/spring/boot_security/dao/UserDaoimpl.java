@@ -1,6 +1,7 @@
 package spring.boot_security.dao;
 
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import spring.boot_security.model.User;
 import javax.persistence.EntityManager;
@@ -63,7 +64,9 @@ public class UserDaoimpl implements UserDao {
     }
 
     @Override
+    @Query ("from User where username=:username")
     public User getUserByUsername(String username) {
+        System.err.println("//getUserByUserName//");
         return entityManager.createQuery("from User where username=:username", User.class)
                 .setParameter("username", username).getSingleResult();
     }
